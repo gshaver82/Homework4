@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Password Generator page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script> 
+
+</head>
+
+<body>  
+
+  <header class ="containter-lg">
+    <nav class="navbar nav-pills flex-column flex-sm-row justify-content-left navbar-light" style="background-color: #fff;">
+      <p class="navbar-brand  nav-link active ">Password Generator page</p>
+
+    </nav>
+  </header>
+  <main class="container-xs m-3">
+    <section class="row border-bottom m-1">
+      <div class="col-lg-12">
+        <h3>Generate a password</h3>
+      </div>
+    </section>
+    <section class="row mt-3">
+      <p>password goes here</p>
+    <section class="row mt-3">
+      <p class="col-lg-4"></p>
+      <button type="button" onclick="main();" 
+      class="col-lg-4 btn btn-danger justify-content-center">Generate Password</button>
+    </section>
+  </main>
+</body>
+
+</html>
+
+
+
+
+<!-- 
+lc = "abcdefghijklmnopqrstuvwxyz";
+uc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+num = "0123456789";
+spec = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+
+
+
+pwcriteria = {
+  charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+  length = 8;
+  lc = true;
+  uc = false;
+  num = true;
+  spec= false;
+}
+
+pwgen = {
+  password = "";
+  lc = true;
+  uc = false;
+  num = true;
+  spec= false;
+}
+
+
+create empty string "charset" that will contain 
+all the chars for the password
+
+on 'generate button click' start the series of prompts
+that will get password criteria.
+
+prompt the length of password, sanitize for length
+
+for each confirm press add chars to the password array
+that correspond to the button asked. add lowercase alphabet
+to the array for example. make boolean true for lowercase
+
+for each confirm press, add true to the criteria
+  if charset = "" add lowercase?
+
+while  pwcriteria.lc != pwgen.lc || ... && password != ""
+  run password gen function
+  reset pwgen to false
+
+make passwordgenfuction
+
+then math random in a for loop for the length of password that
+was prompted earlier.
+
+  run a math random using the range of the charset string
+  as the max
+
+  store the char at the random index from the charset
+  to the password generated 
+
+  call a function that takes the char and checks if 
+  it is in lc or uc or num or spec then change 
+  pwgen.lc to true for example
+
+--------------
+
+lc = "abcdefghijklmnopqrstuvwxyz";
+uc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+num = "0123456789";
+spec = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+
+var password= "";
+
+pwcriteria = {
+  len = 8;
+  lc = true;
+  uc = false;
+  num = true;
+  spec= false;
+}
+
+onbutton click...
+if pwcriteria.lc == false && pwcriteria.uc == false  length is inside 8-128 
+  prompt for lc uc num spec
+
+set pwcriteria.lc = true
+
+
+var password= "";
+
+while  ( password.length <= pwcriteria.len; )
+
+  if pwcriteria.lc ==true && password.length < pwcriteria.len
+    math random from lc
+
+  if pwcriteria.num ==true && password.length < pwcriteria.len
+    math random from num
+
+  if pwcriteria.lc ==true && password.length < pwcriteria.len
+    math random from lc
+
+  if pwcriteria.num ==true && password.length < pwcriteria.len
+    math random from num
+
+display password
+ -->
