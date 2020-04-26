@@ -1,66 +1,110 @@
+quiz = [
+    question1 = {
+        questionText: "what? one",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question2 = {
+        questionText: "what? two",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question3 = {
+        questionText: "what? 3",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question4 = {
+        questionText: "what? 4",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question5 = {
+        questionText: "what? 5",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question6 = {
+        questionText: "what? 6",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question7 = {
+        questionText: "what? 7",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question8 = {
+        questionText: "what? 8",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question9 = {
+        questionText: "what? 9",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+    question10 = {
+        questionText: "what? 10",
+        qAns: ["this", "orthis", "orthis2", "orthis3"],
+        correctans: 1,
+    },
+]
+$(document).ready(function () {
+    var mainhtml = $("main").html();
+    var highscores = $(".highscores").html();
+    $(".highscores").empty();
+    var questionBlock = $("#questionBlock").html();
+    $("#questionBlock").empty();
 
-function main() {
+    $('body').on("click", "#start", function () {
+        $("main").empty();
+        $("main").html(questionBlock);
+        quizFunction();
+    })
+    $('body').on("click", "#highscores", function () {
+        $("main").html(highscores);
+    })
+
+    $('body').on("click", "#restart", function () {
+        $("main").empty();
+        $("main").html(mainhtml);
+    })
+});
 
 
-lowercase = "abcdefghijklmnopqrstuvwxyz";
-uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-number = "0123456789";
-special = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+function quizFunction() {
+    //this var will store the correct answers the player has gotten
+    var tally = 0;
 
-var password= "";
+    //this for loop runs through each of the questions in the quiz array
+    for (var i = 0; i < quiz.length; i++) {
 
-let pwcriteria = {
-  len : 0,
-  lc : false,
-  uc : false,
-  num : false,
-  spec : false,
-}
+        //the console log shows that this is working
+        //cant yet figure out the timer that is going to work
+        //with scope. i put timer on, quiz[i] is undefined. 
 
-// console.log(pwcriteria.lc);
-// console.log(pwcriteria.uc);
-// console.log(pwcriteria.num);
-// console.log(pwcriteria.spec);
-while (pwcriteria.lc == false 
-    && pwcriteria.uc == false 
-    && pwcriteria.num == false 
-    && pwcriteria.spec == false   
-    || (pwcriteria.len < 8 || pwcriteria.len > 128)){
-
-        pwcriteria.len = prompt("How long would you like the password to be?");
-        pwcriteria.lc = confirm("Would you like lowercase characters in your password?");
-        pwcriteria.uc = confirm("Would you like uppercase characters in your password?");
-        pwcriteria.num = confirm("Would you like numerical characters in your password?");
-        pwcriteria.spec = confirm("Would you like special characters in your password?");
+        $("#question").text(quiz[i].questionText);
+        //this is a for loop that  displays each of the 4 possible answers
+        $("ul li").text(function (index) {
+            return "Answer " + (index + 1) + ": " + quiz[i].qAns[index];
+        });
+        //display block above is now complete
+        var temp = quiz[i].correctans;
+        $('body').on("click", ".ans", function () {
+            var clickedans = $(this).attr("value");
+            if(clickedans == temp){
+                $("#grade").text("Correct!");
+                console.log("Correct!");
+                tally ++;
+            }else{
+                $("#grade").text("Wrong!");
+                console.log("Wrong!");
+            }
+        })
+        
 
     }
-var password= "";
-var randomindex = 0;
 
 
-while  (password.length < pwcriteria.len ){
-
-    if (pwcriteria.lc ==true && password.length < pwcriteria.len){
-        randomindex = Math.floor(Math.random() * lowercase.length);    
-        password = password + lowercase[randomindex];
-    }
-
-    if (pwcriteria.uc ==true && password.length < pwcriteria.len){
-        randomindex = Math.floor(Math.random() * uppercase.length);    
-        password = password + uppercase[randomindex];
-    }
-
-    if (pwcriteria.num ==true && password.length < pwcriteria.len){
-        randomindex = Math.floor(Math.random() * number.length);    
-        password = password + number[randomindex];
-    }
-
-    if (pwcriteria.spec ==true && password.length < pwcriteria.len){
-        randomindex = Math.floor(Math.random() * special.length);    
-        password = password + special[randomindex];
-    }
-}
-
-alert("password is " + password);
-
-}
+};

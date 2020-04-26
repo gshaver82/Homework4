@@ -1,11 +1,16 @@
+header h3{
+  float: left;
+}
+header h2{
+  float: right;
+}
+
+
 body {
-  font-size: 18px;
-  line-height: 27px;
-  background-color: #ccc;
+
 }
 
 main{
-  background-color: white;
-  /* margin:30px; */
+
 }
 
