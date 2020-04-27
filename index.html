@@ -23,26 +23,29 @@
   </header>
 
   <main class="container-lg text-center m-4">
-    <div class="row">
-      <div class="col">
-        <h1>
-          Welcome to the coding quiz challenge!
-        </h1>
-        <p>
-          Click the correct answer for all the questions in under a minute!
-        </p>
+    <div id="home">
+      <div class="row">
+        <div class="col">
+          <h1>
+            Welcome to the coding quiz challenge!
+          </h1>
+          <p>
+            Click the correct answer for all the questions in under a minute!
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="button" class="btn btn-primary" id="start">Start</button>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <button type="button" class="btn btn-primary" id="start">Start</button>
-      </div>
-    </div>
+
   </main>
 
 
 
-  <div class="highscores">
+  <div id="highScoreBlock">
     <div class="row">
       <div class="col">
         <h1>
@@ -63,7 +66,7 @@
 
 
 
-  
+
   <div id="questionBlock">
     <div class="row">
       <div class="col">
@@ -73,16 +76,16 @@
       </div>
     </div>
     <div class="row m-3">
-      <ul >
-        <li class="ans" value = 1>ans1</li>
-        <li class="ans" value = 2>ans2</li>
-        <li class="ans" value = 3>ans3</li>
-        <li class="ans" value = 4>ans4</li>
+      <ul id="ulid">
+        <li class="ans" value=1>ans1</li>
+        <li class="ans" value=2>ans2</li>
+        <li class="ans" value=3>ans3</li>
+        <li class="ans" value=4>ans4</li>
       </ul>
       <br>
     </div>
     <div class="row m-3">
-      <strong id = "grade"></strong>
+      <strong id="grade"></strong>
     </div>
   </div>
 

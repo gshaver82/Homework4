@@ -7,9 +7,11 @@ var highScoreTally = 0;
 var quizIndex = 0;
 var temp;
 var clickedans;
-var mainhtml = $("main").html();
-var highscores = $(".highscores").html();
+var mainhtml = $("#home").html();
+var highscores = $("#highScoreBlock").html();
 var questionBlock = $("#questionBlock").html();
+
+// var alreadyClicked = false;
 
 quiz = [
     question1 = {
@@ -64,30 +66,64 @@ quiz = [
     },
 ]
 $(document).ready(function () {
-    mainhtml = $("main").html();
-    highscores = $(".highscores").html();
-    $(".highscores").empty();
+    mainhtml = $("#home").html();
+    highscores = $("#highScoreBlock").html();
+    $("#highScoreBlock").empty();
     questionBlock = $("#questionBlock").html();
     $("#questionBlock").empty();
 
     $('body').on("click", "#start", function () {
         $("main").empty();
         $("main").html(questionBlock);
-        quizFunction();
+        // if(quizFunction()){
+            quizFunction();
+        // }
+        
     })
     $('body').on("click", "#highscores", function () {
         if (tally == -1) {
             $("main").html(highscores);
         }
-
     })
-
     $('body').on("click", "#restart", function () {
         $("main").empty();
         $("main").html(mainhtml);
     })
-});
 
+
+    $('body').on("click", "#ulid .ans ", function () {
+            clickedans = $(this).attr("value");
+            if (clickedans == temp) {
+                $("#grade").text("Correct!");
+                console.log("Correct!");
+                console.log(quizIndex);
+                tally++;
+            } else {
+                $("#grade").text("Wrong!");
+                console.log("Wrong!");
+            }
+
+            if (quizIndex == quiz.length) {
+                console.log(quizIndex + "quizIndex matches quizlength");
+                highScoreTally = tally;
+                tally = -1;
+                quizIndex = 0;
+                $("main").empty();
+                $("main").html(highscores);
+            } else {
+                //this populates the question
+                setTimeout(function () {
+                    $("#question").text(quiz[quizIndex].questionText);
+                    $("#grade").text("");
+                    //this is a for loop that  displays each of the 4 possible answers
+                    $("ul li").text(function (index) {
+                        return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
+                    });
+                    quizIndex++;
+                }, 250);
+            }
+    })
+});
 
 function quizFunction() {
     //this var will store the correct answers the player has gotten
@@ -101,38 +137,6 @@ function quizFunction() {
     //display block above is now complete
     temp = quiz[quizIndex].correctans;
     quizIndex = 1;
-    $('body').on("click", ".ans", function () {
-        clickedans = $(this).attr("value");
-        if (clickedans == temp) {
-            $("#grade").text("Correct!");
-            console.log("Correct!");
-            console.log(quizIndex);
-            tally++;
-        } else {
-            $("#grade").text("Wrong!");
-            console.log("Wrong!");
-        }
-
-        if (quizIndex == quiz.length) {
-            console.log(quizIndex);
-            highScoreTally = tally;
-            tally = -1;
-            quizIndex = 0;
-            $("main").empty();
-            $("main").html(highscores);
-            return;
-        } else {
-            //this populates the question
-            setTimeout(function () {
-                $("#question").text(quiz[quizIndex].questionText);
-                $("#grade").text("");
-                //this is a for loop that  displays each of the 4 possible answers
-                $("ul li").text(function (index) {
-                    return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
-                });
-                quizIndex++;
-            }, 1000);
-        }
-        
-    })
 };
+
+
