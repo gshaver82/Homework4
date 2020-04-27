@@ -1,3 +1,11 @@
+//if tally = -1 that means the quiz hasnt started
+//this will allow highscores to be seen
+//if tally has a value not -1 then the quiz is in progress
+//and program will not allow you to back out to high scores
+var tally = -1;
+var highScoreTally = 0;
+var quizIndex = 0;
+
 quiz = [
     question1 = {
         questionText: "what? one",
@@ -63,7 +71,10 @@ $(document).ready(function () {
         quizFunction();
     })
     $('body').on("click", "#highscores", function () {
-        $("main").html(highscores);
+        if (tally == -1) {
+            $("main").html(highscores);
+        }
+
     })
 
     $('body').on("click", "#restart", function () {
@@ -75,36 +86,43 @@ $(document).ready(function () {
 
 function quizFunction() {
     //this var will store the correct answers the player has gotten
-    var tally = 0;
-
-    //this for loop runs through each of the questions in the quiz array
-    for (var i = 0; i < quiz.length; i++) {
-
-        //the console log shows that this is working
-        //cant yet figure out the timer that is going to work
-        //with scope. i put timer on, quiz[i] is undefined. 
-
-        $("#question").text(quiz[i].questionText);
-        //this is a for loop that  displays each of the 4 possible answers
-        $("ul li").text(function (index) {
-            return "Answer " + (index + 1) + ": " + quiz[i].qAns[index];
-        });
-        //display block above is now complete
-        var temp = quiz[i].correctans;
-        $('body').on("click", ".ans", function () {
-            var clickedans = $(this).attr("value");
-            if(clickedans == temp){
-                $("#grade").text("Correct!");
-                console.log("Correct!");
-                tally ++;
-            }else{
-                $("#grade").text("Wrong!");
-                console.log("Wrong!");
-            }
-        })
-        
-
-    }
+    tally = 0;
 
 
+    $("#question").text(quiz[quizIndex].questionText);
+    //this is a for loop that  displays each of the 4 possible answers
+    $("ul li").text(function (index) {
+        return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
+    });
+    //display block above is now complete
+    var temp = quiz[quizIndex].correctans;
+    quizIndex++;
+    $('body').on("click", ".ans", function () {
+        var clickedans = $(this).attr("value");
+        if (clickedans == temp) {
+            $("#grade").text("Correct!");
+            console.log("Correct!");
+            tally++;
+        } else {
+            $("#grade").text("Wrong!");
+            console.log("Wrong!");
+        }
+
+        if (quizIndex == quiz.length) {
+            console.log(quizIndex);
+            highScoreTally = tally;
+            tally = -1;
+            quizIndex = -1;
+            $("main").empty();
+            $("main").html(highscores);
+        } else {
+            //this populates the question
+            $("#question").text(quiz[quizIndex].questionText);
+            //this is a for loop that  displays each of the 4 possible answers
+            $("ul li").text(function (index) {
+                return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
+            });
+        }
+        quizIndex++;
+    })
 };
