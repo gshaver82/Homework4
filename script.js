@@ -5,6 +5,11 @@
 var tally = -1;
 var highScoreTally = 0;
 var quizIndex = 0;
+var temp;
+var clickedans;
+var mainhtml = $("main").html();
+var highscores = $(".highscores").html();
+var questionBlock = $("#questionBlock").html();
 
 quiz = [
     question1 = {
@@ -59,10 +64,10 @@ quiz = [
     },
 ]
 $(document).ready(function () {
-    var mainhtml = $("main").html();
-    var highscores = $(".highscores").html();
+    mainhtml = $("main").html();
+    highscores = $(".highscores").html();
     $(".highscores").empty();
-    var questionBlock = $("#questionBlock").html();
+    questionBlock = $("#questionBlock").html();
     $("#questionBlock").empty();
 
     $('body').on("click", "#start", function () {
@@ -87,21 +92,21 @@ $(document).ready(function () {
 function quizFunction() {
     //this var will store the correct answers the player has gotten
     tally = 0;
-
-
+    quizIndex = 0;
     $("#question").text(quiz[quizIndex].questionText);
     //this is a for loop that  displays each of the 4 possible answers
     $("ul li").text(function (index) {
         return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
     });
     //display block above is now complete
-    var temp = quiz[quizIndex].correctans;
-    quizIndex++;
+    temp = quiz[quizIndex].correctans;
+    quizIndex = 1;
     $('body').on("click", ".ans", function () {
-        var clickedans = $(this).attr("value");
+        clickedans = $(this).attr("value");
         if (clickedans == temp) {
             $("#grade").text("Correct!");
             console.log("Correct!");
+            console.log(quizIndex);
             tally++;
         } else {
             $("#grade").text("Wrong!");
@@ -112,17 +117,22 @@ function quizFunction() {
             console.log(quizIndex);
             highScoreTally = tally;
             tally = -1;
-            quizIndex = -1;
+            quizIndex = 0;
             $("main").empty();
             $("main").html(highscores);
+            return;
         } else {
             //this populates the question
-            $("#question").text(quiz[quizIndex].questionText);
-            //this is a for loop that  displays each of the 4 possible answers
-            $("ul li").text(function (index) {
-                return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
-            });
+            setTimeout(function () {
+                $("#question").text(quiz[quizIndex].questionText);
+                $("#grade").text("");
+                //this is a for loop that  displays each of the 4 possible answers
+                $("ul li").text(function (index) {
+                    return "Answer " + (index + 1) + ": " + quiz[quizIndex].qAns[index];
+                });
+                quizIndex++;
+            }, 1000);
         }
-        quizIndex++;
+        
     })
 };
